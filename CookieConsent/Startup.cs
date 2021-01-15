@@ -26,20 +26,8 @@ namespace CookieConsent
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential 
-                // cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
-            services.AddHttpContextAccessor();
-            services.AddSingleton<ICookiesManagementProvider, CookiesManagementProvider>();
-            services.AddSingleton<CookiesSettingsBuilder>();
+            services.AddCookiesOneTrustProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,10 +46,7 @@ namespace CookieConsent
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

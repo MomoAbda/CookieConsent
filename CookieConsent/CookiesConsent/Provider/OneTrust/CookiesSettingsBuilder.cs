@@ -21,10 +21,10 @@ namespace CookieConsent.CookiesConsent.Provider.OneTrust
             Dictionary<ICookiesGroup, bool> settings = new Dictionary<ICookiesGroup, bool>()
                 {
                      {
-                        new CookiesGroup("BookMe",new List<ICookies>{new Cookies("BookMeCookie") }),true
+                        new CookiesGroup("BookMe",new List<ICookies>{new Cookies("BookMeCookie") }),false
                     },
                       {
-                        new CookiesGroup("Vouchers",new List<ICookies>{new Cookies("VoucherCookie") }),false
+                        new CookiesGroup("Vouchers",new List<ICookies>{new Cookies("VoucherCookie") }),true
                     }
                    };
 

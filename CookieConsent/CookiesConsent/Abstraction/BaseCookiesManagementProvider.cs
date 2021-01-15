@@ -1,11 +1,6 @@
 ﻿namespace CookieConsent.CookiesConsent.Abstraction
 {
-    public interface ICookiesManagementProvider
-    {
-        string Name { get; }
-        public IUserCookiesSettings GetCurrentUserCookiesSettings();
-
-    }
+   
     public abstract class BaseCookiesManagementProvider : ICookiesManagementProvider
     {
         public abstract string Name { get; }

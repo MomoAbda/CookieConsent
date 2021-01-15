@@ -6,6 +6,7 @@ namespace CookieConsent.CookiesConsent.Provider.OneTrust
 {
     public class CookiesSettingsBuilder : ICookiesSettingsBuilder
     {
+        private const string ONETRUST_COOKIENAME = "OptanonConsent";
         private IHttpContextAccessor _httpContextAccessor;
 
         public CookiesSettingsBuilder(IHttpContextAccessor httpContextAccessor)
@@ -15,6 +16,8 @@ namespace CookieConsent.CookiesConsent.Provider.OneTrust
 
         public IUserCookiesSettings Build()
         {
+            var oneTrustCookies = GetOneTrustCookiesValue();
+
             Dictionary<ICookiesGroup, bool> settings = new Dictionary<ICookiesGroup, bool>()
                 {
                      {
@@ -26,6 +29,11 @@ namespace CookieConsent.CookiesConsent.Provider.OneTrust
                    };
 
             return new UserCookiesSettings(settings);
+        }
+
+        private string GetOneTrustCookiesValue()
+        {
+            return _httpContextAccessor.HttpContext.Request.Cookies[ONETRUST_COOKIENAME];
         }
     }
 }

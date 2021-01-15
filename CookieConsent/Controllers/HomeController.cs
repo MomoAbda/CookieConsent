@@ -27,7 +27,6 @@ namespace CookieConsent.Controllers
             var voucherCookiesGroup = settings.GetGroupByName("Vouchers");
             var isVoucherCookiesGroupConsented = settings.IsConsented(voucherCookiesGroup);
 
-
             
             HttpContext.Response.Cookies.Append("BookMe", "1");
             return View();

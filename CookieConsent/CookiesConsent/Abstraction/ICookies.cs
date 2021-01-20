@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace CookieConsent
+
+namespace CookieConsent.CookiesConsent.Abstraction
 {
     public interface ICookies
     {
-        string Name { get; }
+        IEnumerable<CookiesGroup> Groups { get; }
     }
+
 }

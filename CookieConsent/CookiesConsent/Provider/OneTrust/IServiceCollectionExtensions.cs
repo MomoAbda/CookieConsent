@@ -9,8 +9,10 @@ namespace CookieConsent.CookiesConsent.Provider.OneTrust
         public static IServiceCollection AddCookiesOneTrustProvider(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
-            services.TryAddSingleton<ICookiesManagementProvider, CookiesManagementProvider>();
-            services.TryAddSingleton<CookiesSettingsBuilder>();
+
+            services.TryAddSingleton<ICookiesManagementProvider, OneTrustCookiesManagementProvider>();
+            services.TryAddSingleton<OneTrustCookiesSettingsBuilder>();
+            services.TryAddSingleton<IOneTrustConsentCookieFactory, OneTrustConsentCookieFactory>();
 
             return services;
         }

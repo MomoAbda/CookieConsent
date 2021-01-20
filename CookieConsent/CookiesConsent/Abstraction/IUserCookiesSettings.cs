@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using CookieConsent.CookiesConsent;
 
 namespace CookieConsent
 {
     public interface IUserCookiesSettings
     {
-        Dictionary<ICookiesGroup, bool> GroupsConsent { get; }
-        bool IsConsented(ICookiesGroup cookiesGroup);
-        ICookiesGroup GetGroupByName(string name);
+        bool IsConsented(string groupName);
     }
 }

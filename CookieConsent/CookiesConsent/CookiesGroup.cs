@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-
-namespace CookieConsent.CookiesConsent
+﻿namespace CookieConsent.CookiesConsent
 {
-    public class CookiesGroup : ICookiesGroup
+    public class CookiesGroup
     {
         public string Name { get; }
 
-        public IEnumerable<ICookies> Cookies { get; }
+        public bool IsEnable { get; }
 
-        public CookiesGroup(string name, IEnumerable<ICookies> cookies)
+        public CookiesGroup(string name, bool isEnable)
         {
             Name = name;
-            Cookies = cookies;
+            IsEnable = isEnable;
         }
     }
 }

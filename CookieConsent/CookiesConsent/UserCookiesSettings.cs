@@ -1,42 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CookieConsent.CookiesConsent.Abstraction;
+using System;
 using System.Linq;
 
-namespace CookieConsent.CookiesConsent.Provider.OneTrust
+namespace CookieConsent.CookiesConsent
 {
-    public class UserCookiesSettings : IUserCookiesSettings
+    public abstract class UserCookiesSettings : IUserCookiesSettings
     {
-        public Dictionary<ICookiesGroup, bool> GroupsConsent { get; }
+        public ICookies _cookies { get; }
 
-        public bool IsConsented(ICookiesGroup cookiesGroup)
+        public UserCookiesSettings(ICookies cookies)
         {
-            if (cookiesGroup != null)
-            {
+            if (cookies == null)
+                throw new ArgumentException("cookies parameter must be not null");
 
-                var findedGroup = GetGroupByName(cookiesGroup.Name);
+            _cookies = cookies;
+        }
 
-                if (findedGroup != null)
-                    return GroupsConsent.First(p => p.Key.Name == findedGroup.Name).Value;
-            }
+        public bool IsConsented(string groupName)
+        {
+            var group = _cookies.Groups.FirstOrDefault(p => p.Name == groupName);
+            
+            if(group != null)
+                return group.IsEnable;
 
             return false;
-        }
-
-        public ICookiesGroup GetGroupByName(string name)
-        {
-            var groupExist = GroupsConsent.Any(p => p.Key.Name == name);
-            if (groupExist)
-                return GroupsConsent.FirstOrDefault(p => p.Key.Name == name).Key;
-
-            return null;
-        }
-
-        public UserCookiesSettings(Dictionary<ICookiesGroup, bool> groupsConsent)
-        {
-            if (groupsConsent == null)
-                throw new ArgumentException("Groups Consent is mandatory");
-
-            GroupsConsent = groupsConsent;
         }
     }
 }
